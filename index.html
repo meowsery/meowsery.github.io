@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://www.newegg.com/insider/wp-content/uploads/windows_xp_bliss-wide.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            gap: 30px;
+        }
+
+        video {
+            width: 100%;
+            border: 1px solid rgb(91, 96, 97);
+            outline: none;
+            display: block;
+        }
+
+        #soundcloud-player {
+            position: fixed;
+            top: 80px;
+            left: 10px;
+            z-index: 1000;
+        }
+
+        img {
+            border: 1px solid rgb(91, 96, 97);
+            width: 360px;
+            height: auto;
+        }
+
+        .window {
+            width: 800px;
+            height: 800px;
+        }
+
+        p {
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <iframe id="soundcloud-player" width="500" height="166" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/shivergotbanned/go-to-sleep-shiver&auto_play=true">
+    </iframe>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script>
+        const iframeElement = document.getElementById('soundcloud-player');
+        const widget = SC.Widget(iframeElement);
+
+        widget.bind(SC.Widget.Events.READY, function () {
+            widget.setVolume(5);
+        });
+    </script>
+    <div class="window" width=800px height=800px>
+        <div class="title-bar">
+            <div class="title-bar-text">Roblox</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <menu role="tablist">
+                <button role="tab" aria-selected="true" aria-controls="projects">Projects</button>
+                <button role="tab" aria-controls="contributed">Contributed</button>
+                <button role="tab" aria-controls="aboutme">About me</button>
+            </menu>
+            <article role="tabpanel" id="projects">
+                <div class="main-grid">
+                    <div>
+                        <p><strong>Kova Sound | Sound Dynamics</strong></p>
+                        <video autoplay loop controls playsinline muted="true">
+                            <source src="video.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </article>
+            <article role="tabpanel" hidden id="contributed">
+                <div class="main-grid">
+                    <p>None so far :d</p>
+                    <!--
+                    <div>
+                        the tools or wtv
+                        https://thumbnails.roblox.com/v1/games/icons?universeIds={id}7&size=512x512&format=png
+                        https://apis.roblox.com/universes/v1/places/{id}/universe
+                        <p><strong><a href="https://www.roblox.com/games/126780066290796/W-SPEED-OBBY"
+                                    target="_blank">*W SPEED* OBBY</a></strong></p>
+                        <img src="https://tr.rbxcdn.com/180DAY-9df34afb9d12509d7e5cfc93169fbee7/512/512/Image/Png/noFilter"
+                            alt="Game Thumbnail" width=360px height=360px>
+                    </div>
+                    -->
+                </div>
+            </article>
+            <article role="tabpanel" hidden id="aboutme">
+                <div class="main-grid">
+                    <div>
+                        <p><strong>Hi! I'm meowsery and i've developed/coded games for about 3 years starting since 2022</strong></p>
+                        <p>
+                            I can do <strong>front-end and back-end</strong> (and modular) coding.
+                        </p>
+                        <p>
+                            I'll only accept <strong>cashapp or robux</strong>.
+                        </p>
+                        <p>
+                            <strong>My downsides...</strong>
+                        </p>
+                        <p>
+                            I have minimal experience working with other people (hoping to fix that :D).
+                        </p>
+                        <p>
+                            Will need week long breaks for long-term projects (this could change depending on the project).
+                        </p>
+                        <p>
+                            Pretty buggy code most of the time :p.
+                        </p>
+                        <p>
+                            VERY low chance of me calling anybody i work with unless i feel comfortable.
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('[role="tab"]');
+        const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+                tabPanels.forEach(panel => panel.hidden = true);
+                tab.setAttribute('aria-selected', 'true');
+                const targetPanel = document.getElementById(tab.getAttribute('aria-controls'));
+                targetPanel.hidden = false;
+            });
+        });
+    </script>
+</body>
+
+</html>
